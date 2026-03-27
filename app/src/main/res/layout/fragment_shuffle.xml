@@ -74,11 +74,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:background="#FFF9EF"
+                    android:background="@color/shuffle_result_background"
                     android:minHeight="80dp"
                     android:padding="12dp"
                     android:text="请先输入项目并执行打乱"
-                    android:textColor="#1E2A3A"
+                    android:textColor="@color/result_text"
                     android:textIsSelectable="true"
                     android:textSize="16sp" />
             </LinearLayout>

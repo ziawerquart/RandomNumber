@@ -82,11 +82,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:background="#F4FFF7"
+                    android:background="@color/pick_result_background"
                     android:minHeight="80dp"
                     android:padding="12dp"
                     android:text="请先输入项目并开始抽取"
-                    android:textColor="#1E2A3A"
+                    android:textColor="@color/result_text"
                     android:textIsSelectable="true"
                     android:textSize="16sp" />
             </LinearLayout>

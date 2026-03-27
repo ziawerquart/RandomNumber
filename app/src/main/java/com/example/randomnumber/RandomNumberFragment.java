@@ -22,6 +22,11 @@ import java.util.Random;
 public class RandomNumberFragment extends Fragment {
 
     private final Random random = new Random();
+    private EditText editMin;
+    private EditText editMax;
+    private EditText editCount;
+    private TextView textGenerateResult;
+    private boolean hasGeneratedResult;
 
     public RandomNumberFragment() {
         super(R.layout.fragment_random_number);
@@ -38,10 +43,10 @@ public class RandomNumberFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        EditText editMin = view.findViewById(R.id.editMin);
-        EditText editMax = view.findViewById(R.id.editMax);
-        EditText editCount = view.findViewById(R.id.editCount);
-        TextView textGenerateResult = view.findViewById(R.id.textGenerateResult);
+        editMin = view.findViewById(R.id.editMin);
+        editMax = view.findViewById(R.id.editMax);
+        editCount = view.findViewById(R.id.editCount);
+        textGenerateResult = view.findViewById(R.id.textGenerateResult);
         MaterialButton btnGenerate = view.findViewById(R.id.btnGenerate);
 
         btnGenerate.setOnClickListener(v -> {
@@ -77,7 +82,32 @@ public class RandomNumberFragment extends Fragment {
                 }
             }
             textGenerateResult.setText(output.toString());
+            hasGeneratedResult = true;
         });
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (hasGeneratedResult) {
+            clearInputs();
+            hasGeneratedResult = false;
+        }
+    }
+
+    private void clearInputs() {
+        if (editMin != null) {
+            editMin.setText("");
+        }
+        if (editMax != null) {
+            editMax.setText("");
+        }
+        if (editCount != null) {
+            editCount.setText("");
+        }
+        if (textGenerateResult != null) {
+            textGenerateResult.setText("请先输入参数并点击生成");
+        }
     }
 
     private Integer parseInteger(String value) {
