@@ -4,4 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="result_background">#F4F7FF</color>
     <color name="result_text">#1E2A3A</color>
+    <color name="pick_result_background">#F4FFF7</color>
+    <color name="shuffle_result_background">#FFF9EF</color>
 </resources>

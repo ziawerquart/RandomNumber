@@ -21,6 +21,11 @@ import java.util.List;
 
 public class BatchPickFragment extends Fragment {
 
+    private EditText editPickItems;
+    private EditText editPickCount;
+    private TextView textPickResult;
+    private boolean hasPickedResult;
+
     public BatchPickFragment() {
         super(R.layout.fragment_batch_pick);
     }
@@ -36,9 +41,9 @@ public class BatchPickFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        EditText editPickItems = view.findViewById(R.id.editPickItems);
-        EditText editPickCount = view.findViewById(R.id.editPickCount);
-        TextView textPickResult = view.findViewById(R.id.textPickResult);
+        editPickItems = view.findViewById(R.id.editPickItems);
+        editPickCount = view.findViewById(R.id.editPickCount);
+        textPickResult = view.findViewById(R.id.textPickResult);
         MaterialButton btnPick = view.findViewById(R.id.btnPick);
 
         btnPick.setOnClickListener(v -> {
@@ -71,7 +76,29 @@ public class BatchPickFragment extends Fragment {
                 }
             }
             textPickResult.setText(output.toString());
+            hasPickedResult = true;
         });
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (hasPickedResult) {
+            clearInputs();
+            hasPickedResult = false;
+        }
+    }
+
+    private void clearInputs() {
+        if (editPickItems != null) {
+            editPickItems.setText("");
+        }
+        if (editPickCount != null) {
+            editPickCount.setText("");
+        }
+        if (textPickResult != null) {
+            textPickResult.setText("请先输入项目并开始抽取");
+        }
     }
 
     private List<String> parseItems(String rawText) {

@@ -20,6 +20,10 @@ import java.util.List;
 
 public class ShuffleFragment extends Fragment {
 
+    private EditText editShuffleItems;
+    private TextView textShuffleResult;
+    private boolean hasShuffledResult;
+
     public ShuffleFragment() {
         super(R.layout.fragment_shuffle);
     }
@@ -35,8 +39,8 @@ public class ShuffleFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        EditText editShuffleItems = view.findViewById(R.id.editShuffleItems);
-        TextView textShuffleResult = view.findViewById(R.id.textShuffleResult);
+        editShuffleItems = view.findViewById(R.id.editShuffleItems);
+        textShuffleResult = view.findViewById(R.id.textShuffleResult);
         MaterialButton btnShuffle = view.findViewById(R.id.btnShuffle);
 
         btnShuffle.setOnClickListener(v -> {
@@ -56,7 +60,26 @@ public class ShuffleFragment extends Fragment {
                 }
             }
             textShuffleResult.setText(output.toString());
+            hasShuffledResult = true;
         });
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (hasShuffledResult) {
+            clearInputs();
+            hasShuffledResult = false;
+        }
+    }
+
+    private void clearInputs() {
+        if (editShuffleItems != null) {
+            editShuffleItems.setText("");
+        }
+        if (textShuffleResult != null) {
+            textShuffleResult.setText("请先输入项目并执行打乱");
+        }
     }
 
     private List<String> parseItems(String rawText) {
