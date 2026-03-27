@@ -88,11 +88,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:background="#F4F7FF"
+                    android:background="@color/result_background"
                     android:minHeight="80dp"
                     android:padding="12dp"
                     android:text="请先输入参数并点击生成"
-                    android:textColor="#1E2A3A"
+                    android:textColor="@color/result_text"
                     android:textIsSelectable="true"
                     android:textSize="16sp" />
             </LinearLayout>
